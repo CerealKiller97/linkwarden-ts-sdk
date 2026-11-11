@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { DashboardSectionType } from "../../src/index.js";
-import { cleanup, createTestCollection, createTestLink, describeE2E, linkIds, newClient } from "./helpers.js";
+import { DashboardSectionType } from "../../src/index.ts";
+import { cleanup, createTestCollection, createTestLink, describeE2E, linkIds, newClient } from "./helpers.ts";
 
 describeE2E("DashboardService", () => {
   it("getV1 includes recent links", async () => {

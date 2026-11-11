@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { cleanup, createTestCollection, createTestHighlight, createTestLink, describeE2E, newClient } from "./helpers.js";
+import { cleanup, createTestCollection, createTestHighlight, createTestLink, describeE2E, newClient } from "./helpers.ts";
 
 describeE2E("HighlightsService", () => {
   it("create adds a highlight to a link", async () => {

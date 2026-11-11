@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { isNotFound } from "../../src/index.js";
-import { cleanup, createTestCollection, describeE2E, newClient, uniqueName } from "./helpers.js";
+import { isNotFound } from "../../src/index.ts";
+import { cleanup, createTestCollection, describeE2E, newClient, uniqueName } from "./helpers.ts";
 
 describeE2E("CollectionsService", () => {
   it("create creates a collection", async () => {

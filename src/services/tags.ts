@@ -1,5 +1,5 @@
-import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.js";
-import type { Sort, Tag } from "../types.js";
+import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.ts";
+import type { Sort, Tag } from "../types.ts";
 
 /** Filters and paginates `tags.list`. */
 export type ListTagsOptions = {

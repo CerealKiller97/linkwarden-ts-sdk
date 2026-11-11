@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { TokenExpiry } from "../../src/index.js";
-import { cleanup, createTestToken, describeE2E, newClient, uniqueName } from "./helpers.js";
+import { TokenExpiry } from "../../src/index.ts";
+import { cleanup, createTestToken, describeE2E, newClient, uniqueName } from "./helpers.ts";
 
 describeE2E("TokensService", () => {
   it("create returns a working secret", async () => {

@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { cleanup, createTestUser, describeE2E, newClient, signInAs, uniqueName } from "./helpers.js";
+import { cleanup, createTestUser, describeE2E, newClient, signInAs, uniqueName } from "./helpers.ts";
 
 describeE2E("UsersService", () => {
   it("me returns the authenticated user", async () => {

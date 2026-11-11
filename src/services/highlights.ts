@@ -1,5 +1,5 @@
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
-import type { Highlight } from "../types.js";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
+import type { Highlight } from "../types.ts";
 
 /**
  * The payload for `highlights.create`. The API treats it as create-or-update: a

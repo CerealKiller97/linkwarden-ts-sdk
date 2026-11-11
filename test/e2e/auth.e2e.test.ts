@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { describeE2E, newAnonymousClient, uniqueName } from "./helpers.js";
+import { describeE2E, newAnonymousClient, uniqueName } from "./helpers.ts";
 
 describeE2E("AuthService", () => {
   it("forgotPassword succeeds for an unknown email", async () => {

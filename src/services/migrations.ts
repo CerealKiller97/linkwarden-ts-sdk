@@ -1,4 +1,4 @@
-import { decodeResponseEnvelope, decodeText, type RequestOptions, type Transport } from "../http.js";
+import { decodeResponseEnvelope, decodeText, type RequestOptions, type Transport } from "../http.ts";
 
 /** The source format for `migrations.import`. */
 export const ImportFormat = {

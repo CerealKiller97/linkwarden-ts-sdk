@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { describeE2E, newAnonymousClient } from "./helpers.js";
+import { describeE2E, newAnonymousClient } from "./helpers.ts";
 
 describeE2E("LoginsService", () => {
   it("get returns the instance's sign-in methods", async () => {

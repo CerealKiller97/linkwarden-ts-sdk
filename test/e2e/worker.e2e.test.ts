@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { isApiError, PreservationResetAction } from "../../src/index.js";
-import { createTestCollection, createTestLink, createTestUser, describeE2E, newClient, signInAs } from "./helpers.js";
+import { isApiError, PreservationResetAction } from "../../src/index.ts";
+import { createTestCollection, createTestLink, createTestUser, describeE2E, newClient, signInAs } from "./helpers.ts";
 
 // The test user is the instance's first user, which Linkwarden treats as the admin.
 describeE2E("WorkerService", () => {

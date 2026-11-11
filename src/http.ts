@@ -1,4 +1,4 @@
-import { LinkwardenApiError, LinkwardenError } from "./errors.js";
+import { LinkwardenApiError, LinkwardenError } from "./errors.ts";
 
 /** A `fetch`-compatible function, for passing a custom one to the client. */
 export type FetchLike = (input: string, init: RequestInit) => Promise<Response>;
