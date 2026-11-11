@@ -28,11 +28,7 @@ export type UpdateCollectionRequest = {
 
 /** Accesses the `/api/v1/collections` endpoints. */
 export class CollectionsService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns every collection the authenticated user owns or is a member of. */
   public async list(options?: RequestOptions): Promise<Collection[]> {

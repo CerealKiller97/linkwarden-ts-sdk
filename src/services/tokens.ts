@@ -49,11 +49,7 @@ export type CreateTokenRequest = {
 
 /** Accesses the `/api/v1/tokens` endpoints. */
 export class TokensService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the authenticated user's API tokens, without their secrets. */
   public async list(options?: RequestOptions): Promise<Token[]> {

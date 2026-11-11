@@ -13,11 +13,7 @@ export type SearchOptions = {
 
 /** Accesses the `/api/v1/search` endpoint. */
 export class SearchService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /**
    * Returns one page of links matching `opts.searchQueryString`, or an empty array.

@@ -13,11 +13,7 @@ export type ImportFormat = (typeof ImportFormat)[keyof typeof ImportFormat];
 
 /** Accesses the `/api/v1/migration` endpoints. */
 export class MigrationsService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /**
    * Returns the raw JSON export (user info, collections, links) as text, for writing

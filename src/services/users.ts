@@ -97,11 +97,7 @@ export type UpdateUserPreferencesRequest = Partial<Omit<UserPreferences, "id" | 
 
 /** Accesses the `/api/v1/users` endpoints. */
 export class UsersService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the users on the instance that the authenticated user can see. */
   public async list(options?: RequestOptions): Promise<User[]> {

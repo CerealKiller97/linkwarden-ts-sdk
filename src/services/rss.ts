@@ -28,11 +28,7 @@ export type CreateRssRequest = {
 
 /** Accesses the `/api/v1/rss` endpoints. */
 export class RssService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the authenticated user's RSS subscriptions. */
   public async list(options?: RequestOptions): Promise<RssSubscription[]> {

@@ -9,7 +9,7 @@ same services and behaviour.
 
 ## Install
 
-Requires **Node.js 20.3+** (or any runtime with `fetch`, `FormData`, `Blob` and
+Requires **Node.js 22+** (or any runtime with `fetch`, `FormData`, `Blob` and
 `AbortSignal.any`), and TypeScript 5.0+ for its types. The package is ESM-only. Each release is
 tested against a specific Linkwarden version, listed in [CHANGELOG.md](CHANGELOG.md).
 
@@ -427,7 +427,15 @@ data.
 The tested Linkwarden version is pinned in [`.linkwarden-version`](.linkwarden-version); CI and
 `scripts/dev-linkwarden.sh` both run it.
 
-Object shapes are declared with `type`, never `interface`; ESLint enforces it.
+Object shapes are declared with `type`, never `interface`, and class members always say
+`public` or `private`; ESLint enforces both.
+
+`tsc` is TypeScript 7, installed as `@typescript/native`. typescript-eslint doesn't support the
+TypeScript 7 API yet, so the `typescript` package is aliased to `@typescript/typescript6` for it,
+as the TypeScript 7 release notes recommend.
+
+CI runs on pushes to `main` and on pull requests: `lint` (ESLint), `typecheck` (`tsc` and the
+build), and `test` (unit tests on Node 22, 24 and 26, plus the E2E tests against Docker).
 
 Relative imports name the `.ts` file (`import { Transport } from "./http.ts"`), and
 `rewriteRelativeImportExtensions` turns them into `.js` in the build. The published `.d.ts` files

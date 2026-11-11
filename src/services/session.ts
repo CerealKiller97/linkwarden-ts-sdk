@@ -16,11 +16,7 @@ export type CreateSessionRequest = {
 
 /** Accesses the `/api/v1/session` endpoint. */
 export class SessionService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /**
    * Signs in with a username and password, returning a session token usable as the

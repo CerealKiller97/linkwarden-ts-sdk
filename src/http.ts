@@ -44,11 +44,7 @@ export type TransportConfig = {
 
 /** Performs HTTP requests against the Linkwarden API. Internal to the SDK. */
 export class Transport {
-  private readonly config: TransportConfig;
-
-  public constructor(config: TransportConfig) {
-    this.config = config;
-  }
+  public constructor(private readonly config: TransportConfig) {}
 
   /**
    * Performs a request and returns the fully-read response. A non-2xx status throws
@@ -104,7 +100,11 @@ export class Transport {
       });
     }
 
-    return { status: response.status, headers: response.headers, body: bytes };
+    return {
+      status: response.status,
+      headers: response.headers,
+      body: bytes
+    };
   }
 
   private resolveSignal(signal: AbortSignal | undefined): AbortSignal | undefined {
@@ -210,7 +210,10 @@ export class Query {
 
 /** Reads a binary response as a {@link BinaryFile}. */
 export function binaryFile(res: TransportResponse): BinaryFile {
-  return { data: res.body, contentType: res.headers.get("Content-Type") ?? "" };
+  return {
+    data: res.body,
+    contentType: res.headers.get("Content-Type") ?? ""
+  };
 }
 
 /**
@@ -232,6 +235,7 @@ export async function buildFileForm(
   for (const [key, value] of Object.entries(fields)) {
     form.append(key, value);
   }
+
   form.append(fileField, typed, filename);
 
   return form;
@@ -241,6 +245,7 @@ function toBlob(file: FileInput): Blob {
   if (file instanceof Blob) {
     return file;
   }
+
   if (file instanceof ArrayBuffer) {
     return new Blob([file]);
   }
@@ -281,6 +286,7 @@ export function fileContentType(filename: string, head: Uint8Array): string {
   const dot = filename.lastIndexOf(".");
   if (dot >= 0) {
     const fromExtension = EXTENSION_TYPES[filename.slice(dot + 1).toLowerCase()];
+
     if (fromExtension) {
       return fromExtension;
     }

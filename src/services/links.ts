@@ -82,13 +82,10 @@ export function decodeSearchLinks(body: Uint8Array): Link[] {
 
 /** Accesses the `/api/v1/links` endpoints. */
 export class LinksService {
-  private readonly transport: Transport;
-  private readonly collections: CollectionsService;
-
-  public constructor(transport: Transport, collections: CollectionsService) {
-    this.transport = transport;
-    this.collections = collections;
-  }
+  public constructor(
+    private readonly transport: Transport,
+    private readonly collections: CollectionsService,
+  ) {}
 
   /**
    * Returns one page of links matching `opts`. To get the next page, set

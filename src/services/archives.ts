@@ -55,11 +55,7 @@ export function archiveFile(res: TransportResponse): ArchiveFile {
 
 /** Accesses the `/api/v1/archives` endpoints. */
 export class ArchivesService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Downloads a link's archived file in the given format. The whole file is read into memory. */
   public async get(linkId: number, opts: GetArchiveOptions, options?: RequestOptions): Promise<ArchiveFile> {

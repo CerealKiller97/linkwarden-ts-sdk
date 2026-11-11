@@ -19,11 +19,7 @@ export type CreateHighlightRequest = {
  * `links.highlights`, since there is no list-all endpoint.
  */
 export class HighlightsService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Adds a highlight to a link. */
   public async create(req: CreateHighlightRequest, options?: RequestOptions): Promise<Highlight> {
