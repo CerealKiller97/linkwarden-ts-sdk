@@ -1,0 +1,26 @@
+name: typecheck
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # `tsc` is TypeScript 7 (installed as @typescript/native); see package.json.
+  tsc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: 🔎 Typecheck sources and tests
+        run: pnpm typecheck
+      - name: 📦 Check the build emits
+        run: pnpm build

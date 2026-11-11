@@ -19,11 +19,7 @@ export type LoginConfig = {
 
 /** Accesses the `/api/v1/logins` endpoint. */
 export class LoginsService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the instance's login configuration. It doesn't require authentication. */
   public async get(options?: RequestOptions): Promise<LoginConfig> {

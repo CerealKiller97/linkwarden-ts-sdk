@@ -18,11 +18,7 @@ export type ViewPreservedOptions = {
  * instance's user content domain (`USER_CONTENT_DOMAIN`).
  */
 export class PreservedService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns a short-lived signed URL for loading an archived format of a link from the user content domain. */
   public async token(linkId: number, format: ArchiveFormat, options?: RequestOptions): Promise<PreservedFormatUrl> {

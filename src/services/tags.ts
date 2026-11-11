@@ -26,11 +26,7 @@ export type TagUpsert = {
 
 /** Accesses the `/api/v1/tags` endpoints. */
 export class TagsService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns one page of the authenticated user's tags, with link counts. */
   public async list(opts: ListTagsOptions = {}, options?: RequestOptions): Promise<Tag[]> {

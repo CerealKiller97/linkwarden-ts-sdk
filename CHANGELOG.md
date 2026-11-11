@@ -19,3 +19,4 @@ All notable changes to this project are documented here. The format follows
 - Client options for a custom `fetch`, extra headers and a per-request timeout; every method
   takes an `AbortSignal`.
 - E2E tests for every service against a real Linkwarden instance.
+- Built and type-checked with TypeScript 7. Requires Node.js 22 or later.

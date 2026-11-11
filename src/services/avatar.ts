@@ -2,11 +2,7 @@ import { type BinaryFile, binaryFile, type RequestOptions, type Transport } from
 
 /** Accesses the `/api/v1/avatar` endpoint. */
 export class AvatarService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Downloads the avatar image of the user with the given ID. A user without one is a 404. */
   public async get(userId: number, options?: RequestOptions): Promise<BinaryFile> {

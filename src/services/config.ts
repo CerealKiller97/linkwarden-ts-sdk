@@ -17,11 +17,7 @@ export type PublicConfig = {
 
 /** Accesses the `/api/v1/config` endpoint. */
 export class ConfigService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the instance's public configuration. It doesn't require authentication. */
   public async get(options?: RequestOptions): Promise<PublicConfig> {

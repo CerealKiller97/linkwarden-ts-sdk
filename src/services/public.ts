@@ -34,11 +34,7 @@ export type ListPublicLinksOptions = {
  * from public collections.
  */
 export class PublicService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns a public collection. */
   public async collection(id: number, options?: RequestOptions): Promise<Collection> {

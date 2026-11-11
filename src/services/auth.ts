@@ -10,11 +10,7 @@ export type ResetPasswordRequest = {
 
 /** Accesses the unauthenticated `/api/v1/auth` endpoints. Each call returns the API's status message. */
 export class AuthService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /**
    * Sends a password reset email. Since Linkwarden v2.17 it succeeds whether or not

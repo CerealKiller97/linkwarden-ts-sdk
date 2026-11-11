@@ -18,11 +18,7 @@ export type PreservationResetAction = (typeof PreservationResetAction)[keyof typ
 
 /** Accesses the `/api/v1/worker` endpoints. Both require the server admin user. */
 export class WorkerService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns how many links are pending, done or failed for each kind of job. */
   public async stats(options?: RequestOptions): Promise<WorkerStats> {

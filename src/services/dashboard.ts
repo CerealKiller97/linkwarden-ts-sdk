@@ -51,11 +51,7 @@ function normalizeDashboard(data: DashboardV2Data | null): DashboardV2Data {
 
 /** Accesses the `/api/v1/dashboard` and `/api/v2/dashboard` endpoints. */
 export class DashboardService {
-  private readonly transport: Transport;
-
-  public constructor(transport: Transport) {
-    this.transport = transport;
-  }
+  public constructor(private readonly transport: Transport) {}
 
   /** Returns the v1 dashboard's recent links. */
   public async getV1(options?: RequestOptions): Promise<Link[]> {
