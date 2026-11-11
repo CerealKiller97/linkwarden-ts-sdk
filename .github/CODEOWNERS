@@ -1,0 +1,5 @@
+# Owners are requested for review automatically on pull requests that touch their files.
+# Later rules take precedence over earlier ones.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @CerealKiller97

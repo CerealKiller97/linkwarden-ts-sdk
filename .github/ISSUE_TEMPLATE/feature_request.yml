@@ -1,0 +1,44 @@
+name: ✨ Feature request
+description: Suggest a new endpoint, option or improvement.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: What you're trying to do, and what's missing or awkward today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: How you'd like it to work. A sketch of the API you'd call helps.
+      render: ts
+      placeholder: |
+        const page = await client.links.listPage({ collectionId: 7 });
+        console.log(page.links, page.nextCursor);
+    validations:
+      required: true
+
+  - type: input
+    id: endpoint
+    attributes:
+      label: Linkwarden API endpoint
+      description: If this is about an endpoint the SDK doesn't cover yet, its path or a link to the Linkwarden API docs.
+      placeholder: "GET /api/v1/..."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+      description: Workarounds you use today, or other designs you thought about.
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to open a pull request for this.
