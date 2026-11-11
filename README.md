@@ -29,7 +29,10 @@ const client = new LinkwardenClient({
 });
 
 // Create a collection…
-const collection = await client.collections.create({ name: "Reading List", color: "#f59e0b" });
+const collection = await client.collections.create({
+  name: "Reading List",
+  color: "#f59e0b",
+});
 
 // …and save a tagged link into it.
 const link = await client.links.create({
@@ -94,7 +97,11 @@ import { Sort } from "linkwarden-ts-sdk";
 
 const hits = await client.search.links({ searchQueryString: "kubernetes" });
 
-const pinned = await client.links.list({ collectionId: 7, pinnedOnly: true, sort: Sort.DateNewestFirst });
+const pinned = await client.links.list({
+  collectionId: 7,
+  pinnedOnly: true,
+  sort: Sort.DateNewestFirst,
+});
 ```
 
 </details>
@@ -123,10 +130,15 @@ for (;;) {
 <summary><b>Update, reorder, archive and delete</b></summary>
 
 ```ts
-// Only the fields you pass are changed; the rest are kept from the current link.
-await client.links.update(412, { name: "Effective TypeScript (2nd ed.)", tags: [{ name: "typescript" }] });
+// Only the fields you pass are changed; the rest are kept from the
+// current link.
+await client.links.update(412, {
+  name: "Effective TypeScript (2nd ed.)",
+  tags: [{ name: "typescript" }],
+});
 
-// Move a link to the top of its collection's custom order, or below another link.
+// Move a link to the top of its collection's custom order, or below
+// another link.
 await client.links.reorder(412);
 await client.links.reorder(418, { beforeId: 412 });
 
@@ -161,7 +173,10 @@ await client.links.bulkUpdate({
 
 ```ts
 const parent = await client.collections.create({ name: "Programming" });
-const child = await client.collections.create({ name: "TypeScript", parentId: parent.id });
+const child = await client.collections.create({
+  name: "TypeScript",
+  parentId: parent.id,
+});
 
 // Make it public and give user 3 read/write access.
 await client.collections.update(child.id, {
@@ -181,7 +196,10 @@ for (const tag of tags) {
   console.log(tag.name.padEnd(20), tag._count?.links ?? 0, "links");
 }
 
-await client.tags.createOrUpdateBulk([{ label: "to-read" }, { label: "reference", archiveAsPDF: true }]);
+await client.tags.createOrUpdateBulk([
+  { label: "to-read" },
+  { label: "reference", archiveAsPDF: true },
+]);
 
 await client.tags.update(12, "typescript"); // rename
 await client.tags.bulkDelete([13, 14]);
@@ -285,8 +303,13 @@ await writeFile("backup.json", await client.migrations.export());
 ```ts
 import { ImportFormat } from "linkwarden-ts-sdk";
 
-const html = await readFile("bookmarks.html", "utf8"); // exported from Chrome, Firefox, Safari…
-const message = await client.migrations.import(ImportFormat.BookmarksHTML, html);
+// Exported from Chrome, Firefox, Safari…
+const html = await readFile("bookmarks.html", "utf8");
+
+const message = await client.migrations.import(
+  ImportFormat.BookmarksHTML,
+  html,
+);
 console.log(message); // the import runs in the background on the server
 ```
 
@@ -300,7 +323,10 @@ Other formats: `ImportFormat.LinkwardenJSON`, `WallabagJSON`, `OmnivoreJSON`, `P
 ```ts
 import { TokenExpiry } from "linkwarden-ts-sdk";
 
-const created = await client.tokens.create({ name: "ci-bot", expires: TokenExpiry.Never });
+const created = await client.tokens.create({
+  name: "ci-bot",
+  expires: TokenExpiry.Never,
+});
 console.log(created.secretKey); // only returned once — store it now
 
 const tokens = await client.tokens.list();
@@ -317,7 +343,10 @@ await client.tokens.revoke(created.token.id);
 ```ts
 const anon = new LinkwardenClient({ baseUrl });
 
-const token = await anon.session.create({ username: "dev", password: process.env.LINKWARDEN_PASSWORD! });
+const token = await anon.session.create({
+  username: "dev",
+  password: process.env.LINKWARDEN_PASSWORD!,
+});
 
 const client = new LinkwardenClient({ baseUrl, token });
 const me = await client.users.me();
@@ -371,7 +400,10 @@ await writeFile("ts.ico", icon.data);
 const client = new LinkwardenClient({ baseUrl, token, timeoutMs: 30_000 });
 
 // Every method takes a last { signal } argument for per-call cancellation.
-const links = await client.links.list({}, { signal: AbortSignal.timeout(5_000) });
+const links = await client.links.list(
+  {},
+  { signal: AbortSignal.timeout(5_000) },
+);
 ```
 
 An aborted request rejects with the runtime's own `AbortError` / `TimeoutError`, unchanged.
@@ -440,6 +472,34 @@ build), and `test` (unit tests on Node 22, 24 and 26, plus the E2E tests against
 Relative imports name the `.ts` file (`import { Transport } from "./http.ts"`), and
 `rewriteRelativeImportExtensions` turns them into `.js` in the build. The published `.d.ts` files
 keep the `.ts` paths, which TypeScript 5.0 and later resolve to the declaration files.
+
+### Releases
+
+Releases are SemVer git tags (`v0.1.0`, `v1.0.0`, …). Pushing a tag runs the
+[release workflow](.github/workflows/release.yml): it checks the tag, runs the tests on the tagged
+commit, publishes the package to npm and creates a GitHub release with the tag's CHANGELOG
+section as its notes.
+
+To cut a release:
+
+1. Set `version` in `package.json` to the new version.
+2. In `CHANGELOG.md`, rename `[Unreleased]` to `## [x.y.z] - YYYY-MM-DD`, keep its
+   `🧪 Tested against Linkwarden: <version>` line, and start a new empty `[Unreleased]`.
+3. Check the notes: `scripts/release-notes.sh vX.Y.Z`
+4. Merge that to `main`, then tag and push: `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`
+
+The workflow fails before publishing if the tag doesn't match `package.json`, if the changelog
+has no section for it, or if that section names a different Linkwarden version than
+[`.linkwarden-version`](.linkwarden-version). Pre-release tags such as `v1.0.0-rc.1` are published
+under npm's `next` dist-tag. To retry a failed release, run the workflow by hand with the tag;
+a version already on npm is skipped.
+
+npm authentication uses [trusted publishing](https://docs.npmjs.com/trusted-publishers), so no
+npm token is stored in GitHub. Set it up once on npmjs.com, in the package's settings, for this
+repository and the workflow file `release.yml`. Until that's in place (for example, for the very
+first publish), add an npm automation token as the `NPM_TOKEN` repository secret: the workflow
+uses it when it's set. npm only attaches provenance to packages published from a public
+repository.
 
 ## License
 

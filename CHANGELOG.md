@@ -22,3 +22,5 @@ All notable changes to this project are documented here. The format follows
 - Built and type-checked with TypeScript 7. Requires Node.js 22 or later.
 - Requires TypeScript 5.0 or later for type checking: the published `.d.ts` files import
   each other with `.ts` paths.
+- Release workflow: pushing a version tag runs the tests, publishes the package to npm with
+  trusted publishing, and creates a GitHub release from the CHANGELOG.
