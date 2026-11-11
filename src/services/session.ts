@@ -1,4 +1,4 @@
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
 
 /** The payload for `session.create`. */
 export type CreateSessionRequest = {

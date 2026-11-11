@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { isApiError, LinkwardenClient, LinkwardenError } from "../../src/index.js";
-import { describeE2E, env, newClient } from "./helpers.js";
+import { isApiError, LinkwardenClient, LinkwardenError } from "../../src/index.ts";
+import { describeE2E, env, newClient } from "./helpers.ts";
 
 describeE2E("LinkwardenClient", () => {
   it("authenticates with the token", async () => {

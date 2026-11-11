@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { isNotFound } from "../../src/index.js";
+import { isNotFound } from "../../src/index.ts";
 import {
   cleanup,
   createTestCollection,
@@ -8,7 +8,7 @@ import {
   newClient,
   testFeedUrl,
   uniqueName,
-} from "./helpers.js";
+} from "./helpers.ts";
 
 describeE2E("RssService", () => {
   it("create subscribes to a feed", async () => {

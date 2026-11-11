@@ -1,6 +1,6 @@
-import { decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.js";
-import type { ArchiveFormat } from "../types.js";
-import { type ArchiveFile, archiveFile } from "./archives.js";
+import { decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.ts";
+import type { ArchiveFormat } from "../types.ts";
+import { type ArchiveFile, archiveFile } from "./archives.ts";
 
 /** A short-lived signed URL for an archived format, as returned by `preserved.token`. */
 export type PreservedFormatUrl = {

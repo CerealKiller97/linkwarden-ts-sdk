@@ -9,7 +9,7 @@ import {
   newClient,
   uniqueName,
   uniqueUrl,
-} from "./helpers.js";
+} from "./helpers.ts";
 
 describeE2E("PublicService", () => {
   it("collection returns a public collection without a token", async () => {

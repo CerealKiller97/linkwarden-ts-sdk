@@ -1,6 +1,6 @@
-import { LinkwardenApiError } from "../errors.js";
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
-import type { Collection, Member, MemberInput } from "../types.js";
+import { LinkwardenApiError } from "../errors.ts";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
+import type { Collection, Member, MemberInput } from "../types.ts";
 
 /** The payload for `collections.create`. */
 export type CreateCollectionRequest = {

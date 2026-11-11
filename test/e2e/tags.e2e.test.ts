@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { isNotFound } from "../../src/index.js";
-import { cleanup, createTestTag, describeE2E, newClient, uniqueName } from "./helpers.js";
+import { isNotFound } from "../../src/index.ts";
+import { cleanup, createTestTag, describeE2E, newClient, uniqueName } from "./helpers.ts";
 
 describeE2E("TagsService", () => {
   it("createOrUpdateBulk creates every tag", async () => {

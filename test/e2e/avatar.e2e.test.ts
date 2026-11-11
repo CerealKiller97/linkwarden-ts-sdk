@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { isNotFound } from "../../src/index.js";
-import { createTestUser, describeE2E, newClient } from "./helpers.js";
+import { isNotFound } from "../../src/index.ts";
+import { createTestUser, describeE2E, newClient } from "./helpers.ts";
 
 describeE2E("AvatarService", () => {
   it("get rejects a user without an avatar as not found", async () => {

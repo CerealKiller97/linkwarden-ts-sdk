@@ -9,9 +9,9 @@ import {
   type RequestOptions,
   type Transport,
   type TransportResponse,
-} from "../http.js";
-import { normalizeLink } from "../normalize.js";
-import type { ArchiveFormat, Link } from "../types.js";
+} from "../http.ts";
+import { normalizeLink } from "../normalize.ts";
+import type { ArchiveFormat, Link } from "../types.ts";
 
 /** A downloaded archive file. */
 export type ArchiveFile = BinaryFile & {

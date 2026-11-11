@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { cleanup, createTestCollection, describeE2E, linkIds, newClient, uniqueName, uniqueUrl } from "./helpers.js";
+import { cleanup, createTestCollection, describeE2E, linkIds, newClient, uniqueName, uniqueUrl } from "./helpers.ts";
 
 describeE2E("SearchService", () => {
   it("links finds a link by a word in its name", async () => {

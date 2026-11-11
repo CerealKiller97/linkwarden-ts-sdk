@@ -1,6 +1,6 @@
-import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.js";
-import { normalizeLink, normalizeLinks } from "../normalize.js";
-import type { Collection, Link, Sort, Tag } from "../types.js";
+import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.ts";
+import { normalizeLink, normalizeLinks } from "../normalize.ts";
+import type { Collection, Link, Sort, Tag } from "../types.ts";
 
 /** The public profile of a user, as returned by `public.user`. */
 export type PublicUser = {

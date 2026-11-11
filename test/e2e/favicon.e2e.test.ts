@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { describeE2E, newClient } from "./helpers.js";
+import { describeE2E, newClient } from "./helpers.ts";
 
 describeE2E("FaviconService", () => {
   it("get downloads a site's favicon", async () => {

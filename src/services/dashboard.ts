@@ -1,6 +1,6 @@
-import { decodeDataEnvelope, decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
-import { normalizeLinks } from "../normalize.js";
-import type { Link } from "../types.js";
+import { decodeDataEnvelope, decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
+import { normalizeLinks } from "../normalize.ts";
+import type { Link } from "../types.ts";
 
 /** The kinds of section in the v2 dashboard layout. */
 export const DashboardSectionType = {

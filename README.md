@@ -10,8 +10,8 @@ same services and behaviour.
 ## Install
 
 Requires **Node.js 20.3+** (or any runtime with `fetch`, `FormData`, `Blob` and
-`AbortSignal.any`). The package is ESM-only. Each release is tested against a specific
-Linkwarden version, listed in [CHANGELOG.md](CHANGELOG.md).
+`AbortSignal.any`), and TypeScript 5.0+ for its types. The package is ESM-only. Each release is
+tested against a specific Linkwarden version, listed in [CHANGELOG.md](CHANGELOG.md).
 
 ```bash
 pnpm add linkwarden-ts-sdk
@@ -428,6 +428,10 @@ The tested Linkwarden version is pinned in [`.linkwarden-version`](.linkwarden-v
 `scripts/dev-linkwarden.sh` both run it.
 
 Object shapes are declared with `type`, never `interface`; ESLint enforces it.
+
+Relative imports name the `.ts` file (`import { Transport } from "./http.ts"`), and
+`rewriteRelativeImportExtensions` turns them into `.js` in the build. The published `.d.ts` files
+keep the `.ts` paths, which TypeScript 5.0 and later resolve to the declaration files.
 
 ## License
 

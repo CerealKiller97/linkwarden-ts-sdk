@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { ArchiveFormat } from "../../src/index.js";
-import { cleanup, createTestCollection, createTestLink, describeE2E, newClient, testPng, uniqueUrl } from "./helpers.js";
+import { ArchiveFormat } from "../../src/index.ts";
+import { cleanup, createTestCollection, createTestLink, describeE2E, newClient, testPng, uniqueUrl } from "./helpers.ts";
 
 describeE2E("ArchivesService", () => {
   it("upload attaches a file as the link's archive", async () => {
