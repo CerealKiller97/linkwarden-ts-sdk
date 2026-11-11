@@ -1,0 +1,52 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # Typecheck, lint and build on every supported Node version.
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm build
+      - run: pnpm test:unit
+
+  # The E2E tests run against a real, throwaway Linkwarden instance rather than mocked responses.
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Pinned in .linkwarden-version so upstream releases can't break CI unannounced.
+      - name: 📌 Read pinned Linkwarden version
+        run: echo "LINKWARDEN_VERSION=$(tr -d '[:space:]' < .linkwarden-version)" >> "$GITHUB_ENV"
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: 🐳 Start Linkwarden
+        run: |
+          scripts/dev-linkwarden.sh up
+          scripts/dev-linkwarden.sh env | sed 's/^export //; s/"//g' >> "$GITHUB_ENV"
+      - run: pnpm test
+      - name: 📜 Linkwarden logs
+        if: failure()
+        run: docker compose logs linkwarden

@@ -1,0 +1,64 @@
+{
+  "name": "linkwarden-ts-sdk",
+  "version": "0.1.0",
+  "description": "A typed TypeScript client for the Linkwarden API",
+  "keywords": [
+    "linkwarden",
+    "bookmarks",
+    "sdk",
+    "api-client",
+    "typescript"
+  ],
+  "license": "GPL-3.0-only",
+  "author": "Stefan Bogdanović",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CerealKiller97/linkwarden-ts-sdk.git"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:unit": "vitest run test/unit",
+    "test:e2e": "vitest run test/e2e",
+    "prepublishOnly": "pnpm typecheck && pnpm lint && pnpm build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.14.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
+  },
+  "packageManager": "pnpm@12.18.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "12.18.0",
+      "onFail": "download"
+    }
+  }
+}
