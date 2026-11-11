@@ -473,6 +473,34 @@ Relative imports name the `.ts` file (`import { Transport } from "./http.ts"`), 
 `rewriteRelativeImportExtensions` turns them into `.js` in the build. The published `.d.ts` files
 keep the `.ts` paths, which TypeScript 5.0 and later resolve to the declaration files.
 
+### Releases
+
+Releases are SemVer git tags (`v0.1.0`, `v1.0.0`, …). Pushing a tag runs the
+[release workflow](.github/workflows/release.yml): it checks the tag, runs the tests on the tagged
+commit, publishes the package to npm and creates a GitHub release with the tag's CHANGELOG
+section as its notes.
+
+To cut a release:
+
+1. Set `version` in `package.json` to the new version.
+2. In `CHANGELOG.md`, rename `[Unreleased]` to `## [x.y.z] - YYYY-MM-DD`, keep its
+   `🧪 Tested against Linkwarden: <version>` line, and start a new empty `[Unreleased]`.
+3. Check the notes: `scripts/release-notes.sh vX.Y.Z`
+4. Merge that to `main`, then tag and push: `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`
+
+The workflow fails before publishing if the tag doesn't match `package.json`, if the changelog
+has no section for it, or if that section names a different Linkwarden version than
+[`.linkwarden-version`](.linkwarden-version). Pre-release tags such as `v1.0.0-rc.1` are published
+under npm's `next` dist-tag. To retry a failed release, run the workflow by hand with the tag;
+a version already on npm is skipped.
+
+npm authentication uses [trusted publishing](https://docs.npmjs.com/trusted-publishers), so no
+npm token is stored in GitHub. Set it up once on npmjs.com, in the package's settings, for this
+repository and the workflow file `release.yml`. Until that's in place (for example, for the very
+first publish), add an npm automation token as the `NPM_TOKEN` repository secret: the workflow
+uses it when it's set. npm only attaches provenance to packages published from a public
+repository.
+
 ## License
 
 [GPL-3.0](LICENSE)

@@ -1,0 +1,139 @@
+name: release
+
+# Publishes a version tag to npm and as a GitHub release, with notes from CHANGELOG.md.
+#
+# The tag must match the "version" in package.json and have a CHANGELOG.md section. The
+# tests run first on the tagged commit, against the Linkwarden version pinned in
+# .linkwarden-version, so the "Tested against Linkwarden" line in the notes is true.
+#
+# npm authentication uses trusted publishing (OIDC), so no npm token is stored. Set it up
+# once on npmjs.com under the package's Settings → Trusted publishing, with this
+# repository and the workflow filename "release.yml". Until then (for example, for the
+# very first publish), add an npm automation token as the NPM_TOKEN repository secret;
+# it's used instead when set.
+
+on:
+  push:
+    tags: ["v*"]
+  # Run by hand to retry a release for a tag that already exists. A version that's
+  # already on npm is skipped, so this only redoes the missing steps.
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to release, e.g. v1.0.0
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      # A run started by hand names its tag as text, so check the tag is real before
+      # checking it out: a missing tag otherwise fails checkout with an unclear error.
+      - name: 🏷️ Check tag exists
+        run: |
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::'$TAG' is not a version tag like v1.2.3 or v1.2.3-rc.1"
+            exit 1
+          fi
+          if ! gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --silent 2>/dev/null; then
+            echo "::error::Tag $TAG doesn't exist on GitHub. Create and push it first: git tag -a $TAG -m $TAG && git push origin $TAG"
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+      - name: 📦 Check package.json version
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          if [[ "v$version" != "$TAG" ]]; then
+            echo "::error::package.json has version $version, but the tag is $TAG. Bump package.json and tag that commit."
+            exit 1
+          fi
+      # Fails early if CHANGELOG.md has no entry for the tag, or names a different
+      # Linkwarden version than the one the tests use.
+      - name: 📝 Check changelog entry
+        run: scripts/release-notes.sh "$TAG"
+
+  test:
+    needs: verify
+    uses: ./.github/workflows/test.yml
+    with:
+      ref: ${{ inputs.tag || github.ref }}
+
+  publish:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      # Creates the GitHub release.
+      contents: write
+      # Lets npm authenticate with GitHub's OIDC token (trusted publishing).
+      id-token: write
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TAG }}
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      # Trusted publishing needs npm 11.5.1 or later.
+      - name: ⬆️ Update npm
+        run: npm install --global npm@^11.5.1 && npm --version
+      - run: pnpm install --frozen-lockfile
+
+      - name: 🚀 Publish to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          PRIVATE_REPO: ${{ github.event.repository.private }}
+        run: |
+          version="${TAG#v}"
+          name="$(node -p 'require("./package.json").name')"
+
+          if npm view "$name@$version" version >/dev/null 2>&1; then
+            echo "::notice::$name@$version is already on npm; skipping publish."
+            exit 0
+          fi
+
+          # Pre-releases (1.2.0-rc.1) go to the "next" dist-tag so `npm install` doesn't pick them.
+          dist_tag=latest
+          [[ "$version" == *-* ]] && dist_tag=next
+
+          args=(--access public --tag "$dist_tag")
+          if [[ -n "$NPM_TOKEN" ]]; then
+            echo "Authenticating with the NPM_TOKEN secret."
+            echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >"$RUNNER_TEMP/.npmrc"
+            export NPM_CONFIG_USERCONFIG="$RUNNER_TEMP/.npmrc"
+            # Trusted publishing adds provenance by itself; a token needs the flag. npm
+            # can't generate provenance for private repositories.
+            [[ "$PRIVATE_REPO" != "true" ]] && args+=(--provenance)
+          else
+            echo "Authenticating with trusted publishing (OIDC)."
+          fi
+
+          # prepublishOnly runs typecheck, lint and build before packing.
+          npm publish "${args[@]}"
+
+      - name: 📣 Publish GitHub release
+        run: |
+          scripts/release-notes.sh "$TAG" >"$RUNNER_TEMP/notes.md"
+          prerelease=()
+          [[ "$TAG" == *-* ]] && prerelease=(--prerelease)
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release edit "$TAG" --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md" "${prerelease[@]}"
+          else
+            gh release create "$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md" "${prerelease[@]}"
+          fi
