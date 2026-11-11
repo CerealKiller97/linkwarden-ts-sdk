@@ -1,2 +1,8 @@
 allowBuilds:
   esbuild: true
+
+# Dependabot alert #1 (dev-only): minimatch <11.0.1 is vulnerable to a
+# denial of service via globparts amplification. eslint and typescript-eslint
+# still declare ^10, so force the patched major until they bump it.
+overrides:
+  minimatch: ^11.0.1
