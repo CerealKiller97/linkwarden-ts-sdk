@@ -29,7 +29,10 @@ const client = new LinkwardenClient({
 });
 
 // Create a collection…
-const collection = await client.collections.create({ name: "Reading List", color: "#f59e0b" });
+const collection = await client.collections.create({
+  name: "Reading List",
+  color: "#f59e0b",
+});
 
 // …and save a tagged link into it.
 const link = await client.links.create({
@@ -94,7 +97,11 @@ import { Sort } from "linkwarden-ts-sdk";
 
 const hits = await client.search.links({ searchQueryString: "kubernetes" });
 
-const pinned = await client.links.list({ collectionId: 7, pinnedOnly: true, sort: Sort.DateNewestFirst });
+const pinned = await client.links.list({
+  collectionId: 7,
+  pinnedOnly: true,
+  sort: Sort.DateNewestFirst,
+});
 ```
 
 </details>
@@ -123,10 +130,15 @@ for (;;) {
 <summary><b>Update, reorder, archive and delete</b></summary>
 
 ```ts
-// Only the fields you pass are changed; the rest are kept from the current link.
-await client.links.update(412, { name: "Effective TypeScript (2nd ed.)", tags: [{ name: "typescript" }] });
+// Only the fields you pass are changed; the rest are kept from the
+// current link.
+await client.links.update(412, {
+  name: "Effective TypeScript (2nd ed.)",
+  tags: [{ name: "typescript" }],
+});
 
-// Move a link to the top of its collection's custom order, or below another link.
+// Move a link to the top of its collection's custom order, or below
+// another link.
 await client.links.reorder(412);
 await client.links.reorder(418, { beforeId: 412 });
 
@@ -161,7 +173,10 @@ await client.links.bulkUpdate({
 
 ```ts
 const parent = await client.collections.create({ name: "Programming" });
-const child = await client.collections.create({ name: "TypeScript", parentId: parent.id });
+const child = await client.collections.create({
+  name: "TypeScript",
+  parentId: parent.id,
+});
 
 // Make it public and give user 3 read/write access.
 await client.collections.update(child.id, {
@@ -181,7 +196,10 @@ for (const tag of tags) {
   console.log(tag.name.padEnd(20), tag._count?.links ?? 0, "links");
 }
 
-await client.tags.createOrUpdateBulk([{ label: "to-read" }, { label: "reference", archiveAsPDF: true }]);
+await client.tags.createOrUpdateBulk([
+  { label: "to-read" },
+  { label: "reference", archiveAsPDF: true },
+]);
 
 await client.tags.update(12, "typescript"); // rename
 await client.tags.bulkDelete([13, 14]);
@@ -285,8 +303,13 @@ await writeFile("backup.json", await client.migrations.export());
 ```ts
 import { ImportFormat } from "linkwarden-ts-sdk";
 
-const html = await readFile("bookmarks.html", "utf8"); // exported from Chrome, Firefox, Safari…
-const message = await client.migrations.import(ImportFormat.BookmarksHTML, html);
+// Exported from Chrome, Firefox, Safari…
+const html = await readFile("bookmarks.html", "utf8");
+
+const message = await client.migrations.import(
+  ImportFormat.BookmarksHTML,
+  html,
+);
 console.log(message); // the import runs in the background on the server
 ```
 
@@ -300,7 +323,10 @@ Other formats: `ImportFormat.LinkwardenJSON`, `WallabagJSON`, `OmnivoreJSON`, `P
 ```ts
 import { TokenExpiry } from "linkwarden-ts-sdk";
 
-const created = await client.tokens.create({ name: "ci-bot", expires: TokenExpiry.Never });
+const created = await client.tokens.create({
+  name: "ci-bot",
+  expires: TokenExpiry.Never,
+});
 console.log(created.secretKey); // only returned once — store it now
 
 const tokens = await client.tokens.list();
@@ -317,7 +343,10 @@ await client.tokens.revoke(created.token.id);
 ```ts
 const anon = new LinkwardenClient({ baseUrl });
 
-const token = await anon.session.create({ username: "dev", password: process.env.LINKWARDEN_PASSWORD! });
+const token = await anon.session.create({
+  username: "dev",
+  password: process.env.LINKWARDEN_PASSWORD!,
+});
 
 const client = new LinkwardenClient({ baseUrl, token });
 const me = await client.users.me();
@@ -371,7 +400,10 @@ await writeFile("ts.ico", icon.data);
 const client = new LinkwardenClient({ baseUrl, token, timeoutMs: 30_000 });
 
 // Every method takes a last { signal } argument for per-call cancellation.
-const links = await client.links.list({}, { signal: AbortSignal.timeout(5_000) });
+const links = await client.links.list(
+  {},
+  { signal: AbortSignal.timeout(5_000) },
+);
 ```
 
 An aborted request rejects with the runtime's own `AbortError` / `TimeoutError`, unchanged.
