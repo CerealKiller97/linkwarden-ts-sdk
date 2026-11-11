@@ -1,0 +1,9 @@
+# Every issue goes through one of the templates, so reports come with the details needed.
+blank_issues_enabled: false
+contact_links:
+  - name: 🔗 Linkwarden server issues
+    url: https://github.com/linkwarden/linkwarden/issues
+    about: Bugs in Linkwarden itself, rather than in this SDK, belong in the Linkwarden repository.
+  - name: 📖 Linkwarden API documentation
+    url: https://docs.linkwarden.app/api/api-introduction
+    about: What each endpoint does and returns.

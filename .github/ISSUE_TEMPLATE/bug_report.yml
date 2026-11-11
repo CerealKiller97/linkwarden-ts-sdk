@@ -1,0 +1,84 @@
+name: 🐛 Bug report
+description: Something in the SDK doesn't work as documented.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please don't paste API tokens, passwords or private URLs: replace them with placeholders.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Code to reproduce it
+      description: The smallest snippet that shows the problem.
+      render: ts
+      placeholder: |
+        import { LinkwardenClient } from "linkwarden-ts-sdk";
+
+        const client = new LinkwardenClient({ baseUrl: "https://linkwarden.example.com", token: "<token>" });
+        const link = await client.links.get(1);
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Error or output
+      description: The error message, `LinkwardenApiError` fields (`status`, `apiMessage`, `code`) or stack trace.
+      render: text
+
+  - type: input
+    id: sdk-version
+    attributes:
+      label: SDK version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: linkwarden-version
+    attributes:
+      label: Linkwarden version
+      description: From `client.config.get()` (`INSTANCE_VERSION`), or say "Linkwarden Cloud".
+      placeholder: "v2.17.0"
+    validations:
+      required: true
+
+  - type: input
+    id: runtime
+    attributes:
+      label: Runtime and version
+      description: Node.js, Bun, Deno or a browser, with its version.
+      placeholder: "Node.js 24.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: typescript-version
+    attributes:
+      label: TypeScript version
+      description: Leave it empty if you use plain JavaScript.
+      placeholder: "5.8.3"
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      description: Workarounds you've found, related issues, or other context.
