@@ -10,8 +10,8 @@ same services and behaviour.
 ## Install
 
 Requires **Node.js 22+** (or any runtime with `fetch`, `FormData`, `Blob` and
-`AbortSignal.any`). The package is ESM-only. Each release is tested against a specific
-Linkwarden version, listed in [CHANGELOG.md](CHANGELOG.md).
+`AbortSignal.any`), and TypeScript 5.0+ for its types. The package is ESM-only. Each release is
+tested against a specific Linkwarden version, listed in [CHANGELOG.md](CHANGELOG.md).
 
 ```bash
 pnpm add linkwarden-ts-sdk
@@ -436,6 +436,10 @@ as the TypeScript 7 release notes recommend.
 
 CI runs on pushes to `main` and on pull requests: `lint` (ESLint), `typecheck` (`tsc` and the
 build), and `test` (unit tests on Node 22, 24 and 26, plus the E2E tests against Docker).
+
+Relative imports name the `.ts` file (`import { Transport } from "./http.ts"`), and
+`rewriteRelativeImportExtensions` turns them into `.js` in the build. The published `.d.ts` files
+keep the `.ts` paths, which TypeScript 5.0 and later resolve to the declaration files.
 
 ## License
 

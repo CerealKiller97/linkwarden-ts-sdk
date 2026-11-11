@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
-import { ArchiveFormat } from "../../src/index.js";
-import { createTestCollection, createTestLink, describeE2E, newClient } from "./helpers.js";
+import { ArchiveFormat } from "../../src/index.ts";
+import { createTestCollection, createTestLink, describeE2E, newClient } from "./helpers.ts";
 
 // The test instance has no USER_CONTENT_DOMAIN, so the preserved endpoints can only be
 // checked for the error they return; the happy path needs a separately hosted domain.

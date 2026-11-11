@@ -1,4 +1,4 @@
-export { LinkwardenClient, type LinkwardenClientOptions } from "./client.js";
+export { LinkwardenClient, type LinkwardenClientOptions } from "./client.ts";
 export {
   ErrorCode,
   isApiError,
@@ -7,16 +7,16 @@ export {
   isTooManyRequests,
   LinkwardenApiError,
   LinkwardenError,
-} from "./errors.js";
-export type { BinaryFile, FetchLike, FileInput, RequestOptions } from "./http.js";
-export * from "./types.js";
+} from "./errors.ts";
+export type { BinaryFile, FetchLike, FileInput, RequestOptions } from "./http.ts";
+export * from "./types.ts";
 
-export type { ArchiveFile, GetArchiveOptions, UploadArchiveRequest, UploadStandaloneArchiveRequest } from "./services/archives.js";
-export type { ResetPasswordRequest } from "./services/auth.js";
-export type { CreateCollectionRequest, UpdateCollectionRequest } from "./services/collections.js";
-export type { PublicConfig } from "./services/config.js";
-export { DashboardSectionType, type DashboardLayoutItem, type DashboardV2Data } from "./services/dashboard.js";
-export type { CreateHighlightRequest } from "./services/highlights.js";
+export type { ArchiveFile, GetArchiveOptions, UploadArchiveRequest, UploadStandaloneArchiveRequest } from "./services/archives.ts";
+export type { ResetPasswordRequest } from "./services/auth.ts";
+export type { CreateCollectionRequest, UpdateCollectionRequest } from "./services/collections.ts";
+export type { PublicConfig } from "./services/config.ts";
+export { DashboardSectionType, type DashboardLayoutItem, type DashboardV2Data } from "./services/dashboard.ts";
+export type { CreateHighlightRequest } from "./services/highlights.ts";
 export type {
   BulkUpdateLinksNewData,
   BulkUpdateLinksRequest,
@@ -24,42 +24,42 @@ export type {
   ListLinksOptions,
   ReorderLinkRequest,
   UpdateLinkRequest,
-} from "./services/links.js";
-export type { ButtonAuth, LoginConfig } from "./services/logins.js";
-export { ImportFormat } from "./services/migrations.js";
-export type { PreservedFormatUrl, ViewPreservedOptions } from "./services/preserved.js";
-export type { ListPublicLinksOptions, PublicUser } from "./services/public.js";
-export type { CreateRssRequest, RssSubscription } from "./services/rss.js";
-export type { SearchOptions } from "./services/search.js";
-export type { CreateSessionRequest } from "./services/session.js";
-export type { ListTagsOptions, TagUpsert } from "./services/tags.js";
-export { TokenExpiry, type CreatedToken, type CreateTokenRequest, type Token, type TokenDetail } from "./services/tokens.js";
+} from "./services/links.ts";
+export type { ButtonAuth, LoginConfig } from "./services/logins.ts";
+export { ImportFormat } from "./services/migrations.ts";
+export type { PreservedFormatUrl, ViewPreservedOptions } from "./services/preserved.ts";
+export type { ListPublicLinksOptions, PublicUser } from "./services/public.ts";
+export type { CreateRssRequest, RssSubscription } from "./services/rss.ts";
+export type { SearchOptions } from "./services/search.ts";
+export type { CreateSessionRequest } from "./services/session.ts";
+export type { ListTagsOptions, TagUpsert } from "./services/tags.ts";
+export { TokenExpiry, type CreatedToken, type CreateTokenRequest, type Token, type TokenDetail } from "./services/tokens.ts";
 export type {
   CreateUserRequest,
   UpdateUserPreferencesRequest,
   UpdateUserRequest,
   User,
   UserPreferences,
-} from "./services/users.js";
-export { PreservationResetAction, type WorkerStats } from "./services/worker.js";
+} from "./services/users.ts";
+export { PreservationResetAction, type WorkerStats } from "./services/worker.ts";
 
-export type { ArchivesService } from "./services/archives.js";
-export type { AuthService } from "./services/auth.js";
-export type { AvatarService } from "./services/avatar.js";
-export type { CollectionsService } from "./services/collections.js";
-export type { ConfigService } from "./services/config.js";
-export type { DashboardService } from "./services/dashboard.js";
-export type { FaviconService } from "./services/favicon.js";
-export type { HighlightsService } from "./services/highlights.js";
-export type { LinksService } from "./services/links.js";
-export type { LoginsService } from "./services/logins.js";
-export type { MigrationsService } from "./services/migrations.js";
-export type { PreservedService } from "./services/preserved.js";
-export type { PublicService } from "./services/public.js";
-export type { RssService } from "./services/rss.js";
-export type { SearchService } from "./services/search.js";
-export type { SessionService } from "./services/session.js";
-export type { TagsService } from "./services/tags.js";
-export type { TokensService } from "./services/tokens.js";
-export type { UsersService } from "./services/users.js";
-export type { WorkerService } from "./services/worker.js";
+export type { ArchivesService } from "./services/archives.ts";
+export type { AuthService } from "./services/auth.ts";
+export type { AvatarService } from "./services/avatar.ts";
+export type { CollectionsService } from "./services/collections.ts";
+export type { ConfigService } from "./services/config.ts";
+export type { DashboardService } from "./services/dashboard.ts";
+export type { FaviconService } from "./services/favicon.ts";
+export type { HighlightsService } from "./services/highlights.ts";
+export type { LinksService } from "./services/links.ts";
+export type { LoginsService } from "./services/logins.ts";
+export type { MigrationsService } from "./services/migrations.ts";
+export type { PreservedService } from "./services/preserved.ts";
+export type { PublicService } from "./services/public.ts";
+export type { RssService } from "./services/rss.ts";
+export type { SearchService } from "./services/search.ts";
+export type { SessionService } from "./services/session.ts";
+export type { TagsService } from "./services/tags.ts";
+export type { TokensService } from "./services/tokens.ts";
+export type { UsersService } from "./services/users.ts";
+export type { WorkerService } from "./services/worker.ts";

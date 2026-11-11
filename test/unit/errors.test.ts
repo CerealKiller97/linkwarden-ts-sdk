@@ -6,8 +6,8 @@ import {
   isTooManyRequests,
   LinkwardenApiError,
   LinkwardenError,
-} from "../../src/index.js";
-import { parseRetryAfter } from "../../src/errors.js";
+} from "../../src/index.ts";
+import { parseRetryAfter } from "../../src/errors.ts";
 
 describe("LinkwardenApiError", () => {
   it("reads the message field", () => {

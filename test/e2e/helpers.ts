@@ -20,7 +20,7 @@ import {
   type Tag,
   TokenExpiry,
   type User,
-} from "../../src/index.js";
+} from "../../src/index.ts";
 
 export const env = {
   url: process.env["LINKWARDEN_URL"] ?? "",

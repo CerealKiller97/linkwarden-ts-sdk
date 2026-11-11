@@ -1,5 +1,5 @@
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
-import type { Collection } from "../types.js";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
+import type { Collection } from "../types.ts";
 
 /** A Linkwarden RSS feed subscription. */
 export type RssSubscription = {

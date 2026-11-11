@@ -1,4 +1,4 @@
-import { decodeDataEnvelope, decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
+import { decodeDataEnvelope, decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
 
 /** The background worker's preservation and search indexing queues. */
 export type WorkerStats = {

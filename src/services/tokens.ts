@@ -1,4 +1,4 @@
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
 
 /** How long a new API token stays valid, for `tokens.create`. */
 export const TokenExpiry = {

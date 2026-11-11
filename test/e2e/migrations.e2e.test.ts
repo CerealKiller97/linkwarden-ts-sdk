@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { ImportFormat } from "../../src/index.js";
+import { ImportFormat } from "../../src/index.ts";
 import {
   cleanup,
   createTestCollection,
@@ -8,7 +8,7 @@ import {
   newClient,
   uniqueName,
   uniqueUrl,
-} from "./helpers.js";
+} from "./helpers.ts";
 
 describeE2E("MigrationsService", () => {
   it("export includes the user's collections and links", async () => {

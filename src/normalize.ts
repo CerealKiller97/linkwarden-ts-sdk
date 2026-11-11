@@ -1,4 +1,4 @@
-import type { Link, PinnedBy } from "./types.js";
+import type { Link, PinnedBy } from "./types.ts";
 
 /**
  * Normalizes a link from any endpoint. The OpenAPI schema documents `pinnedBy`

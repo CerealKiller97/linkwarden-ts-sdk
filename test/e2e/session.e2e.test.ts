@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { isNotFound } from "../../src/index.js";
+import { isNotFound } from "../../src/index.ts";
 import {
   cleanup,
   createTestUser,
@@ -8,7 +8,7 @@ import {
   newClient,
   signInAs,
   uniqueName,
-} from "./helpers.js";
+} from "./helpers.ts";
 
 describeE2E("SessionService", () => {
   it("create signs in and returns a usable session token", async () => {

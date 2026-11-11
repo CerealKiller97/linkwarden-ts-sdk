@@ -1,4 +1,4 @@
-import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.js";
+import { decodeResponseEnvelope, type RequestOptions, type Transport } from "../http.ts";
 
 /**
  * A Linkwarden user account. The endpoints return different subsets of these

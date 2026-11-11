@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { isApiError, type LinkwardenClient, Sort } from "../../src/index.js";
+import { isApiError, type LinkwardenClient, Sort } from "../../src/index.ts";
 import {
   cleanup,
   createTestCollection,
@@ -12,7 +12,7 @@ import {
   newClient,
   uniqueName,
   uniqueUrl,
-} from "./helpers.js";
+} from "./helpers.ts";
 
 async function listInCustomOrder(client: LinkwardenClient, collectionId: number): Promise<number[]> {
   return linkIds(await client.links.list({ collectionId, sort: Sort.Custom }));

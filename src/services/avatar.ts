@@ -1,4 +1,4 @@
-import { type BinaryFile, binaryFile, type RequestOptions, type Transport } from "../http.js";
+import { type BinaryFile, binaryFile, type RequestOptions, type Transport } from "../http.ts";
 
 /** Accesses the `/api/v1/avatar` endpoint. */
 export class AvatarService {

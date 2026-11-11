@@ -1,4 +1,4 @@
-import { decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.js";
+import { decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.ts";
 
 /** The payload for `auth.resetPassword`. */
 export type ResetPasswordRequest = {

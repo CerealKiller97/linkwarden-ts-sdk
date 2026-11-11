@@ -1,4 +1,4 @@
-import { decodeJson, type RequestOptions, type Transport } from "../http.js";
+import { decodeJson, type RequestOptions, type Transport } from "../http.ts";
 
 /** One SSO provider offered on the login page. */
 export type ButtonAuth = {

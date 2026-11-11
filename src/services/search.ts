@@ -1,6 +1,6 @@
-import { Query, type RequestOptions, type Transport } from "../http.js";
-import type { Link, Sort } from "../types.js";
-import { decodeSearchLinks } from "./links.js";
+import { Query, type RequestOptions, type Transport } from "../http.ts";
+import type { Link, Sort } from "../types.ts";
+import { decodeSearchLinks } from "./links.ts";
 
 /** Filters and paginates `search.links`. */
 export type SearchOptions = {

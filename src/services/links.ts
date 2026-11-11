@@ -1,7 +1,7 @@
-import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.js";
-import { normalizeLink, normalizeLinks } from "../normalize.js";
-import type { Highlight, Link, PinnedBy, Sort, TagInput } from "../types.js";
-import type { CollectionsService } from "./collections.js";
+import { decodeDataEnvelope, decodeResponseEnvelope, Query, type RequestOptions, type Transport } from "../http.ts";
+import { normalizeLink, normalizeLinks } from "../normalize.ts";
+import type { Highlight, Link, PinnedBy, Sort, TagInput } from "../types.ts";
+import type { CollectionsService } from "./collections.ts";
 
 /** The payload for `links.create`. */
 export type CreateLinkRequest = {

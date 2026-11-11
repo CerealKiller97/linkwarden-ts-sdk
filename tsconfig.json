@@ -9,6 +9,7 @@
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "verbatimModuleSyntax": true,
+    "rewriteRelativeImportExtensions": true,
     "isolatedModules": true,
     "skipLibCheck": true,
     "types": ["node"],

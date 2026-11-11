@@ -1,24 +1,24 @@
-import { type FetchLike, Transport } from "./http.js";
-import { ArchivesService } from "./services/archives.js";
-import { AuthService } from "./services/auth.js";
-import { AvatarService } from "./services/avatar.js";
-import { CollectionsService } from "./services/collections.js";
-import { ConfigService } from "./services/config.js";
-import { DashboardService } from "./services/dashboard.js";
-import { FaviconService } from "./services/favicon.js";
-import { HighlightsService } from "./services/highlights.js";
-import { LinksService } from "./services/links.js";
-import { LoginsService } from "./services/logins.js";
-import { MigrationsService } from "./services/migrations.js";
-import { PreservedService } from "./services/preserved.js";
-import { PublicService } from "./services/public.js";
-import { RssService } from "./services/rss.js";
-import { SearchService } from "./services/search.js";
-import { SessionService } from "./services/session.js";
-import { TagsService } from "./services/tags.js";
-import { TokensService } from "./services/tokens.js";
-import { UsersService } from "./services/users.js";
-import { WorkerService } from "./services/worker.js";
+import { type FetchLike, Transport } from "./http.ts";
+import { ArchivesService } from "./services/archives.ts";
+import { AuthService } from "./services/auth.ts";
+import { AvatarService } from "./services/avatar.ts";
+import { CollectionsService } from "./services/collections.ts";
+import { ConfigService } from "./services/config.ts";
+import { DashboardService } from "./services/dashboard.ts";
+import { FaviconService } from "./services/favicon.ts";
+import { HighlightsService } from "./services/highlights.ts";
+import { LinksService } from "./services/links.ts";
+import { LoginsService } from "./services/logins.ts";
+import { MigrationsService } from "./services/migrations.ts";
+import { PreservedService } from "./services/preserved.ts";
+import { PublicService } from "./services/public.ts";
+import { RssService } from "./services/rss.ts";
+import { SearchService } from "./services/search.ts";
+import { SessionService } from "./services/session.ts";
+import { TagsService } from "./services/tags.ts";
+import { TokensService } from "./services/tokens.ts";
+import { UsersService } from "./services/users.ts";
+import { WorkerService } from "./services/worker.ts";
 
 /** Configures a {@link LinkwardenClient}. */
 export type LinkwardenClientOptions = {

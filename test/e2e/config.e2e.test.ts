@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { describeE2E, newAnonymousClient, newClient } from "./helpers.js";
+import { describeE2E, newAnonymousClient, newClient } from "./helpers.ts";
 
 describeE2E("ConfigService", () => {
   it("get returns the instance version", async () => {
