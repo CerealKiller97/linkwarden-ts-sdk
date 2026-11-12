@@ -1,5 +1,10 @@
 # linkwarden-ts-sdk
 
+[![test](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/test.yml)
+[![lint](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/lint.yml)
+[![typecheck](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/typecheck.yml/badge.svg?branch=main)](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/typecheck.yml)
+[![release](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/release.yml/badge.svg)](https://github.com/CerealKiller97/linkwarden-ts-sdk/actions/workflows/release.yml)
+
 A typed TypeScript client for the [Linkwarden](https://linkwarden.app) API. It covers links,
 collections, tags, search, archives, migrations, RSS, highlights, tokens and more, and has no
 runtime dependencies: it uses the platform's `fetch`.
