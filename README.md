@@ -484,13 +484,19 @@ To cut a release:
 
 1. Set `version` in `package.json` to the new version.
 2. In `CHANGELOG.md`, rename `[Unreleased]` to `## [x.y.z] - YYYY-MM-DD`, keep its
-   `🧪 Tested against Linkwarden: <version>` line, and start a new empty `[Unreleased]`.
-3. Check the notes: `scripts/release-notes.sh vX.Y.Z`
+   `🧪 Tested against Linkwarden: <version>` line, start a new empty `[Unreleased]`, and update
+   the links at the bottom. The comment at the top of the file lists the change headings to use.
+3. Check the notes: `pnpm changelog notes vX.Y.Z`
 4. Merge that to `main`, then tag and push: `git tag -a vX.Y.Z -m vX.Y.Z && git push origin vX.Y.Z`
 
+The changelog follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), with the same
+headings as linkwarden-go-sdk: `✨ Added`, `🔄 Changed`, `⚠️ Deprecated`, `🗑️ Removed`,
+`🐛 Fixed` and `🔒 Security`, in that order. `pnpm lint` runs `pnpm changelog check`, so CI rejects
+a pull request whose changelog breaks those rules.
+
 The workflow fails before publishing if the tag doesn't match `package.json`, if the changelog
-has no section for it, or if that section names a different Linkwarden version than
-[`.linkwarden-version`](.linkwarden-version). Pre-release tags such as `v1.0.0-rc.1` are published
+breaks those rules or has no entry for the tag, or if that entry names a different Linkwarden
+version than [`.linkwarden-version`](.linkwarden-version). Pre-release tags such as `v1.0.0-rc.1` are published
 under npm's `next` dist-tag. To retry a failed release, run the workflow by hand with the tag;
 a version already on npm is skipped.
 

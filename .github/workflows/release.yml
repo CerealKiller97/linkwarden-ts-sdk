@@ -52,6 +52,10 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ env.TAG }}
+      # scripts/changelog.ts runs with Node's built-in TypeScript support.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
       - name: 📦 Check package.json version
         run: |
           version="$(node -p 'require("./package.json").version')"
@@ -59,10 +63,10 @@ jobs:
             echo "::error::package.json has version $version, but the tag is $TAG. Bump package.json and tag that commit."
             exit 1
           fi
-      # Fails early if CHANGELOG.md has no entry for the tag, or names a different
-      # Linkwarden version than the one the tests use.
+      # Fails early if CHANGELOG.md breaks the Keep a Changelog rules, has no entry for
+      # the tag, or names a different Linkwarden version than the one the tests use.
       - name: 📝 Check changelog entry
-        run: scripts/release-notes.sh "$TAG"
+        run: node scripts/changelog.ts notes "$TAG"
 
   test:
     needs: verify
@@ -129,7 +133,7 @@ jobs:
 
       - name: 📣 Publish GitHub release
         run: |
-          scripts/release-notes.sh "$TAG" >"$RUNNER_TEMP/notes.md"
+          node scripts/changelog.ts notes "$TAG" >"$RUNNER_TEMP/notes.md"
           prerelease=()
           [[ "$TAG" == *-* ]] && prerelease=(--prerelease)
           if gh release view "$TAG" >/dev/null 2>&1; then
