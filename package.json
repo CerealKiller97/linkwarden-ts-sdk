@@ -1,6 +1,6 @@
 {
   "name": "linkwarden-ts-sdk",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A typed TypeScript client for the Linkwarden API",
   "keywords": [
     "linkwarden",

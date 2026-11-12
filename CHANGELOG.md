@@ -32,7 +32,11 @@ How to write an entry:
 
 🧪 Tested against Linkwarden: v2.17.0
 
-🎉 First release: a TypeScript port of
+## [1.0.0] - 2026-11-12
+
+🧪 Tested against Linkwarden: v2.17.0
+
+🎉 First stable release: a TypeScript port of
 [linkwarden-go-sdk](https://github.com/CerealKiller97/linkwarden-go-sdk) v1.1.0.
 
 ### ✨ Added
@@ -50,4 +54,5 @@ How to write an entry:
 - Release workflow: pushing a version tag runs the tests, publishes the package to npm with
   trusted publishing, and creates a GitHub release from this changelog.
 
-[unreleased]: https://github.com/CerealKiller97/linkwarden-ts-sdk/commits/main
+[unreleased]: https://github.com/CerealKiller97/linkwarden-ts-sdk/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/CerealKiller97/linkwarden-ts-sdk/releases/tag/v1.0.0
