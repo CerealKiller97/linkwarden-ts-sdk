@@ -24,3 +24,7 @@ jobs:
         run: pnpm typecheck
       - name: 📦 Check the build emits
         run: pnpm build
+      # The release publishes with npm, which enforces package.json rules pnpm doesn't
+      # (such as devEngines), so check with the same npm version on every pull request.
+      - name: 🚚 Check npm can publish the package
+        run: npx --yes npm@^11.5.1 publish --dry-run --access public
